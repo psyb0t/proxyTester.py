@@ -100,7 +100,7 @@ for line in open(proxyFile, 'r'):
   try:
     proxy = proxyParts(line)
   except Exception as e:
-    errWrite(e)
+    errWrite(e.strerror)
   
   if proxy and proxy != '':
     pid = os.fork()
@@ -108,7 +108,7 @@ for line in open(proxyFile, 'r'):
       try:
         childProcess(proxy, url, timeout)
       except Exception as e:
-        errWrite(e)
+        errWrite(e.strerror)
     else:
       children.append(pid)
 
